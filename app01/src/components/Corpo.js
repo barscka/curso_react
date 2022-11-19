@@ -1,13 +1,14 @@
 import React from 'react'
 import Dados from './Dados';
 
+
 export default function Corpo() {
     const nome='Alisson' 
     const sobrenome='Oliveira' 
     const idade='32' 
     const cidade='Paracatu'
-    const altura=175
-    const peso=80
+    let altura=175
+    let peso=80
     var imc =0
     const calculoImc = (peso / ((altura * altura) 
     / 10000)).toFixed(2)
@@ -18,19 +19,25 @@ export default function Corpo() {
         imc = 'IMC de '+calculoImc+', você está no peso ideal';          
     else 
         imc = 'IMC de '+calculoImc+', você está acima do peso'  ;
+    const textoDestaque={
+        color:'#00f',
+        fontSize: '3em'
+    }
 
     
     return(
-        <section>
-            <h2> Cruso react</h2>
-            <p> Treinamento de componentes</p>
+        <section className='caixa'>
+            <h2 style={{color:'#f00', fontSize:'4em'}}> Cruso react</h2>
+            <p style={textoDestaque}> Treinamento de componentes</p>
             <Dados 
                 nome={nome}
                 sobrenome={sobrenome}
                 idade={idade} 
                 cidade={cidade}
-                imc={imc}
+                imc={imc}                
                 />
+            <p className='texto'>Muito obrigado por usar nossos serviços!</p>
+            <a href='#' target="_blank">Sobre nós</a>
         </section>
     )
 }

@@ -3,18 +3,19 @@ import React from 'react'
 
 export default function Imc(props) {
 
-    const altura=175
-    const peso=80
+    let altura=175
+    let peso=80
     var imc =0
-    const calculoImc = (peso / ((altura * altura) 
+    const calculoImc=()=>{
+        (peso / ((altura * altura) 
     / 10000)).toFixed(2)
-    
+    } 
     if (calculoImc < 18.6) 
         imc = 'IMC de '+calculoImc+' é abaixo do peso ideal' ;       
     else if (  calculoImc >= 18.6 && calculoImc < 24.9) 
-        imc = 'IMC de '+calculoImc+' peso ideal';          
+        imc = 'IMC de '+calculoImc()+' peso ideal '-'';          
     else 
-        imc = 'IMC de '+calculoImc+' Acima do peso'  ;
+        imc = 'IMC de '+calculoImc()+' Acima do peso ;('  ;
 
     
     return(
