@@ -1,6 +1,6 @@
 import React from 'react'
 import Dados from './Dados';
-
+import Relogio from './Relogio';
 
 export default function Corpo() {
     const nome='Alisson' 
@@ -27,6 +27,7 @@ export default function Corpo() {
     
     return(
         <section className='caixa'>
+            <p className='relogio'><Relogio/></p>
             <h2 style={{color:'#f00', fontSize:'4em'}}> Cruso react</h2>
             <p style={textoDestaque}> Treinamento de componentes</p>
             <Dados 
