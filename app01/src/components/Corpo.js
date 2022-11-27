@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import Dados from './Dados';
 import Relogio from './Relogio';
 
@@ -33,9 +33,10 @@ export default function Corpo() {
         {categoria: "Utilitario", preco: "120000.00", modelo: "Hilux"},
         {categoria: "Utilitario", preco: "90000.00", modelo: "Ranger"}
     ];
+    const [carro, setCarro]=useState('')
     const listaCarros=carros.map(
         (c)=>
-            <li>{c.categoria} - {c.modelo} : R$ {c.preco}</li>
+            <option>{c.categoria} - {c.modelo} : R$ {c.preco}</option>
     )
   
   const vermelho={color:'#f00'}
@@ -57,22 +58,39 @@ export default function Corpo() {
     if (cor > 2)
       setCor(1)
   }
+
+  const [fnome, setNome]=useState('')
+  const handleChangeNome=(e)=>{
+    setNome(e.target.value)
+  }
   setInterval(mudaCor, 1000)
+
+
     
     return(
         <section className='caixa'>
             <p className='relogio'><Relogio/></p>
             <h2 style={{color:'#f00', fontSize:'4em'}}> Curso react</h2>
             <p style={textoDestaque}> Treinamento de componentes</p>
+            <input
+                type="text"
+                name="fnome"
+                value={fnome}
+                onChange={(e)=>handleChangeNome(e)}
+            />
+            <p>Nome digitado: {fnome}</p>
             <Dados 
-                nome={nome}
+                nome={fnome}
                 sobrenome={sobrenome}
                 idade={idade} 
                 cidade={cidade}
                 imc={imc}                
                 />
             <p >Lista de carros</p>
-            <ul>{listaCarros}</ul>
+            <select value={carros} onChange={(e)=> setCarro(e.target.value)}>
+                {listaCarros}
+            </select>
+            <p> Carro selecionado:  {carro}</p>
             <p style={retCor(cor)}  className='texto'>Muito obrigado por usar nossos serviços!</p>
             <a href='#' target="_blank">Sobre nós</a>
         </section>
