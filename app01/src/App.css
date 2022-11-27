@@ -17,3 +17,11 @@
     font-size: 2em;
 }
 
+.relogio:hover{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #fff;
+}
