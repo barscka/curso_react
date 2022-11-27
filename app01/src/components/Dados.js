@@ -8,6 +8,8 @@ export default function Dados(props) {
             <p>Nome: {props.nome}</p>
             <p>Sobrenome: {props.sobrenome}</p>
             <p>Idade: {props.idade}</p>
+            <p>Peso: {props.peso}</p>
+            <p>Altura: {props.altura}</p>
             <p>Cidade: {props.cidade}</p>
             <p>Peso ideal: {props.imc}</p>
             
