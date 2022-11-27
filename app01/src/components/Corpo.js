@@ -90,6 +90,16 @@ const handleSetNotas=(e)=>{
 }
 
 let somaNotasTotal = (parseFloat(notas.nota1)+parseFloat(notas.nota2)+parseFloat(notas.nota3)+parseFloat(notas.nota4))
+// local storage
+const armazenar=(chave,valor)=>{
+    localStorage.setItem(chave,valor)
+}
+const consultar=(chave)=>{
+    alert(localStorage.getItem(chave))
+}
+const apagar=(chave)=>{
+    localStorage.removeItem(chave)
+}
     
     return(
         <section className='caixa'>
@@ -108,7 +118,7 @@ let somaNotasTotal = (parseFloat(notas.nota1)+parseFloat(notas.nota2)+parseFloat
             <input type="text" name="faltura" value={form.altura} onChange={(e)=>handleFormChange(e)}/>
             <label>Cidade</label>
             <input type="text" name="fcidade" value={form.cidade} onChange={(e)=>handleFormChange(e)}/>
-            
+           
             <Dados 
                 nome={form.nome}
                 sobrenome={form.sobrenome}
@@ -118,6 +128,9 @@ let somaNotasTotal = (parseFloat(notas.nota1)+parseFloat(notas.nota2)+parseFloat
                 cidade={form.cidade}
                 imc={imc}                
                 />
+            <button onClick={()=>armazenar('ls_nome',form.nome)}>Gravar Nome</button>
+            <button onClick={()=>consultar('ls_nome')}>Ver Nome</button>
+            <button onClick={()=>apagar('ls_nome')}>Remover Nome</button>
             <p >Lista de carros</p>
             <select value={carros} onChange={(e)=> setCarro(e.target.value)}>
                 {listaCarros}
