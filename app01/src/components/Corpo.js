@@ -1,6 +1,8 @@
 import React, { useReducer, useState } from 'react';
 import Dados from './Dados';
 import Relogio from './Relogio';
+import Nota from './Nota';
+import Resultado from './Resultado';
 
 export default function Corpo() {
     let altura=175
@@ -74,7 +76,20 @@ export default function Corpo() {
   }
   setInterval(mudaCor, 1000)
 
+const [notas,setNotas]=useState({"nota1": "0", "nota2": "0","nota3": "0","nota4": "0"})
+const handleSetNotas=(e)=>{
+      if(e.target.getAttribute('name')== 'nota1'){
+        setNotas({"nota1": e.target.value, "nota2": notas.nota2, "nota3": notas.nota3, "nota4": notas.nota4})        
+}else if(e.target.getAttribute('name')== 'nota2'){
+        setNotas({"nota1": notas.nota1, "nota2": e.target.value, "nota3": notas.nota3, "nota4": notas.nota4})        
+}else if(e.target.getAttribute('name')== 'nota3'){
+        setNotas({"nota1": notas.nota1, "nota2": notas.nota2, "nota3": e.target.value, "nota4": notas.nota4})        
+}else if(e.target.getAttribute('name')== 'nota4'){
+        setNotas({"nota1": notas.nota1, "nota2": notas.nota2, "nota3": notas.nota3, "nota4": e.target.value})        
+  }
+}
 
+let somaNotasTotal = (parseFloat(notas.nota1)+parseFloat(notas.nota2)+parseFloat(notas.nota3)+parseFloat(notas.nota4))
     
     return(
         <section className='caixa'>
@@ -107,9 +122,19 @@ export default function Corpo() {
             <select value={carros} onChange={(e)=> setCarro(e.target.value)}>
                 {listaCarros}
             </select>
-            <p> Carro selecionado:  {carro}</p>
+            <p> Carro selecionado:  {carro}</p>            
+
+            <h3>Notas:</h3><br></br>
+            {/* Notas */}
+            <Nota num={1} nome={'nota1'} nota={notas.nota1} setNota={handleSetNotas}/>
+            <Nota num={2} nome={'nota2'} nota={notas.nota2} setNota={handleSetNotas}/>
+            <Nota num={3} nome={'nota3'} nota={notas.nota3} setNota={handleSetNotas}/>
+            <Nota num={4} nome={'nota4'} nota={notas.nota4} setNota={handleSetNotas}/>
+            
+            <Resultado somaNotas={somaNotasTotal}/>
+            
             <p style={retCor(cor)}  className='texto'>Muito obrigado por usar nossos serviços!</p>
             <a href='#' target="_blank">Sobre nós</a>
-        </section>
+        </section>        
     )
 }
