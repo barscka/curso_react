@@ -24,6 +24,19 @@ export default function Corpo() {
         fontSize: '3em'
     }
     const [cor, setCor]=useState(1)
+
+    const carros=[
+        {categoria: "Esporte", preco: "100000.00", modelo: "Golfe GTI"},
+        {categoria: "Esporte", preco: "120000.00", modelo: "Camaro"},
+        {categoria: "SUV", preco: "85000.00", modelo: "HRV"},
+        {categoria: "SUV", preco: "120000.00", modelo: "T-Cross"},
+        {categoria: "Utilitario", preco: "120000.00", modelo: "Hilux"},
+        {categoria: "Utilitario", preco: "90000.00", modelo: "Ranger"}
+    ];
+    const listaCarros=carros.map(
+        (c)=>
+            <li>{c.categoria} - {c.modelo} : R$ {c.preco}</li>
+    )
   
   const vermelho={color:'#f00'}
   const verde={color:'#0f0'}
@@ -58,6 +71,8 @@ export default function Corpo() {
                 cidade={cidade}
                 imc={imc}                
                 />
+            <p >Lista de carros</p>
+            <ul>{listaCarros}</ul>
             <p style={retCor(cor)}  className='texto'>Muito obrigado por usar nossos serviços!</p>
             <a href='#' target="_blank">Sobre nós</a>
         </section>
