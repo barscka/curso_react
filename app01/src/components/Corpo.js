@@ -39,6 +39,10 @@ export default function Corpo() {
         (c)=>
             <option>{c.categoria} - {c.modelo} : R$ {c.preco}</option>
     )
+    const [objcarro, setObjCarro]=useState(true)
+    const mostrarOcultarCarro=()=>{
+        setCarro(!carro)
+    }
   
   const vermelho={color:'#f00'}
   const verde={color:'#0f0'}
@@ -103,6 +107,7 @@ const consultar=(chave)=>{
 const apagar=(chave)=>{
     localStorage.removeItem(chave)
 }
+
     
     return(
         <section className='caixa'>
@@ -121,7 +126,7 @@ const apagar=(chave)=>{
             <input type="text" name="faltura" value={form.altura} onChange={(e)=>handleFormChange(e)}/>
             <label>Cidade</label>
             <input type="text" name="fcidade" value={form.cidade} onChange={(e)=>handleFormChange(e)}/>
-           <Carro fator={10}/>
+           
             <Dados 
                 nome={form.nome}
                 sobrenome={form.sobrenome}
@@ -135,11 +140,13 @@ const apagar=(chave)=>{
             <button onClick={()=>consultar('ls_nome')}>Ver Nome</button>
             <button onClick={()=>apagar('ls_nome')}>Remover Nome</button>
             <p >Lista de carros</p>
+           
             <select value={carros} onChange={(e)=> setCarro(e.target.value)}>
                 {listaCarros}
             </select>
-            <p> Carro selecionado:  {carro}</p>            
-
+            <p> Carro selecionado:  {carro}</p> 
+            { carro ? <Carro fator={10}/> : ''}           
+            <button onClick={()=>mostrarOcultarCarro()}>Ocultar</button>
             <h3>Notas:</h3><br></br>
             {/* Notas */}
             <Nota num={1} nome={'nota1'} nota={notas.nota1} setNota={handleSetNotas}/>
