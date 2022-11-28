@@ -3,6 +3,9 @@ import Dados from './Dados';
 import Relogio from './Relogio';
 import Nota from './Nota';
 import Resultado from './Resultado';
+import Classe from './Classe';
+import Carro from './Carro';
+
 
 export default function Corpo() {
     let altura=175
@@ -118,7 +121,7 @@ const apagar=(chave)=>{
             <input type="text" name="faltura" value={form.altura} onChange={(e)=>handleFormChange(e)}/>
             <label>Cidade</label>
             <input type="text" name="fcidade" value={form.cidade} onChange={(e)=>handleFormChange(e)}/>
-           
+           <Carro/>
             <Dados 
                 nome={form.nome}
                 sobrenome={form.sobrenome}
@@ -145,6 +148,7 @@ const apagar=(chave)=>{
             <Nota num={4} nome={'nota4'} nota={notas.nota4} setNota={handleSetNotas}/>
             
             <Resultado somaNotas={somaNotasTotal}/>
+            <Classe/>
             
             <p style={retCor(cor)}  className='texto'>Muito obrigado por usar nossos serviços!</p>
             <a href='#' target="_blank">Sobre nós</a>
