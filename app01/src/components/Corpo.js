@@ -121,7 +121,7 @@ const apagar=(chave)=>{
             <input type="text" name="faltura" value={form.altura} onChange={(e)=>handleFormChange(e)}/>
             <label>Cidade</label>
             <input type="text" name="fcidade" value={form.cidade} onChange={(e)=>handleFormChange(e)}/>
-           <Carro/>
+           <Carro fator={10}/>
             <Dados 
                 nome={form.nome}
                 sobrenome={form.sobrenome}
