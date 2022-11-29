@@ -1,10 +1,11 @@
 import React, { useReducer, useState } from 'react';
 import Dados from './Dados';
-import Relogio from './Relogio';
+import Numero from './Numero';
 import Nota from './Nota';
 import Resultado from './Resultado';
 import Classe from './Classe';
 import Carro from './Carro';
+
 
 
 export default function Corpo() {
@@ -20,10 +21,7 @@ export default function Corpo() {
         imc = 'IMC de '+calculoImc+', você está no peso ideal';          
     else 
         imc = 'IMC de '+calculoImc+', você está acima do peso'  ;
-    const textoDestaque={
-        color:'#00f',
-        fontSize: '3em'
-    }
+ 
     const [cor, setCor]=useState(1)
 
     const carros=[
@@ -63,6 +61,7 @@ export default function Corpo() {
     if (cor > 2)
       setCor(1)
   }
+  const [num,setNum]=useState(10)
 
   const [form, setForm]=useState({"nome": "", "sobrenome":"","idade":"", "peso": "", "altura":"","cidade":""})
   const handleFormChange=(e)=>{
@@ -111,9 +110,11 @@ const apagar=(chave)=>{
     
     return(
         <section className='caixa'>
-            <p className='relogio'><Relogio/></p>
-            <h2 style={{color:'#f00', fontSize:'4em'}}> Curso react</h2>
-            <p style={textoDestaque}> Treinamento de componentes</p>
+            
+            <p> Valor do state num em App: {num}</p>
+            <Numero num={num} setNum={setNum}/>
+            
+            
             <label>Nome</label>
             <input type="text" name="fnome" value={form.nome} onChange={(e)=>handleFormChange(e)}/>
             <label>Sobrenome</label>
@@ -156,6 +157,7 @@ const apagar=(chave)=>{
             
             <Resultado somaNotas={somaNotasTotal}/>
             <Classe/>
+            
             
             <p style={retCor(cor)}  className='texto'>Muito obrigado por usar nossos serviços!</p>
             <a href='#' target="_blank">Sobre nós</a>
