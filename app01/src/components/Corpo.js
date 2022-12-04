@@ -9,21 +9,94 @@ import Carro from './Carro';
 
 
 export default function Corpo() {
-    let altura=175
-    let peso=80
-    var imc =0
-    const calculoImc = (peso / ((altura * altura) 
-    / 10000)).toFixed(2)
-    
-    if (calculoImc < 18.6) 
-        imc = 'IMC de '+calculoImc+', você está abaixo do peso ideal' ;       
-    else if (  calculoImc >= 18.6 && calculoImc < 24.9) 
-        imc = 'IMC de '+calculoImc+', você está no peso ideal';          
-    else 
-        imc = 'IMC de '+calculoImc+', você está acima do peso'  ;
- 
-    const [cor, setCor]=useState(1)
+   // let altura=175
+   // let peso=80
+   // var imc =0
+   // const calculoImc = (peso / ((altura * altura) / 10000)).toFixed(2)
 
+    
+
+    const tabelaIMC=()=>{
+        return (
+            <table border='1' style={{borderCollapse:'collapse'}}>
+            <thead>
+                    <tr>
+                        <th> Classificacao</th> <th> IMC</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Abaixo do Peso</td>
+                        <td>Abaixo de 18,5</td>
+                    </tr>
+                    <tr>
+                        <td>Peso Normal</td>
+                        <td>Entre 18,5 e 24,9</td>
+                    </tr>
+                    <tr>
+                        <td>Sobrepeso</td>
+                        <td>Entre 25 e 29,9</td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau 1</td>
+                        <td>Entre 30 e 34,9</td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau 2</td>
+                        <td>Entre 35 e 39,9</td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau 3 ou Morbida</td>
+                        <td>Acima de 40</td>
+                    </tr>
+
+                </tbody>
+
+        </table>
+        )
+    }
+
+    const fpeso=(p, sp)=>{
+        return(
+            <div>
+                <label>Peso</label>
+                <input type="text" value={p} onChange={(e)=>{sp(e.target.value)}}/>
+            </div>
+        )
+    }
+    const faltura=(a, sa)=>{
+        return(
+            <div>
+                <label>Altura</label>
+                <input type="text" value={a} onChange={(e)=>{sa(e.target.value)}}/>
+            </div>
+        )
+    }
+    const fcalcular=(p,a, sr)=>{
+        
+        const calc=()=>{
+            sr(p/(a*a))
+        }
+        return(
+            <div>
+                <button onClick={calc}>Calcular</button>
+            </div>
+        )
+    }
+    const fresultado=(r)=>{
+        return(
+            <div>
+                <p> Resultado: {r.toFixed(2)}</p>
+            </div>
+        )
+    }
+    const [peso, setPeso]=useState(0)
+    const [altura, setAltura]=useState(0)
+    const [resultado,setResultado]=useState(0)
+
+    
+    const [cor, setCor]=useState(1)
+    
     const carros=[
         {categoria: "Esporte", preco: "100000.00", modelo: "Golfe GTI"},
         {categoria: "Esporte", preco: "120000.00", modelo: "Camaro"},
@@ -32,6 +105,54 @@ export default function Corpo() {
         {categoria: "Utilitario", preco: "120000.00", modelo: "Hilux"},
         {categoria: "Utilitario", preco: "90000.00", modelo: "Ranger"}
     ];
+    const linhas=(cat)=>{
+        const linha=[]        
+            carros.forEach(
+                (carro)=>{
+                    if (carro.categoria.toUpperCase() == cat.toUpperCase() || cat.toUpperCase() == ''){
+                        linha.push(
+                            <tr>
+                                <td>
+                                {carro.categoria}
+                                </td>
+                                <td>
+                                {carro.preco}
+                                </td>
+                                <td>
+                                {carro.modelo}
+                                </td>
+                            </tr>
+                        )
+                    }
+                }
+            )
+        return linha          
+    }
+
+    const pesquisaCategoria=(cat,scat)=>{
+        return(
+            <div>
+                <label> Digite a Categoria</label>
+                <input type="text" value={cat} onChange={(e)=>scat(e.target.value)}/>
+            </div>
+        )
+    }
+    const TableCarros=(cat)=> {
+        return(
+            <table border='1' style={{borderCollapse: 'collapse'}}>
+                <thead>
+                    <tr>
+                        <th> Categoria</th> <th> Preço</th> <th>Modelo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {linhas(cat)}
+                </tbody>
+            </table>
+        )
+
+    }
+    const [categoria, setCategoria]=useState('')
     const [carro, setCarro]=useState('')
     const listaCarros=carros.map(
         (c)=>
@@ -135,12 +256,21 @@ const apagar=(chave)=>{
                 peso={form.peso}
                 altura={form.altura}
                 cidade={form.cidade}
-                imc={imc}                
+                               
                 />
+            <h2>Calculo IMC</h2>
+            {fpeso(peso,setPeso)}
+            {faltura(altura,setAltura)}
+            {fcalcular(peso,altura,setResultado)}
+            {fresultado(resultado)}
+            {tabelaIMC()}
             <button onClick={()=>armazenar('ls_nome',form.nome)}>Gravar Nome</button>
             <button onClick={()=>consultar('ls_nome')}>Ver Nome</button>
             <button onClick={()=>apagar('ls_nome')}>Remover Nome</button>
             <p >Lista de carros</p>
+            {pesquisaCategoria(categoria, setCategoria)}
+            {pesquisaCategoria(categoria, setCategoria)}
+            {TableCarros(categoria)}
            
             <select value={carros} onChange={(e)=> setCarro(e.target.value)}>
                 {listaCarros}
