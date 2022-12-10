@@ -1,11 +1,14 @@
 import React from 'react'
 
-export default function ResultadoIMC(props){
+export default class ResultadoIMC extends React.Component{
+    constructor(){
+        super()
+    }
+    render(){
         return(
             <div>
-                <p> Resultado: {props.r.toFixed(2)}</p>
+                <p> Resultado: {this.props.r.toFixed(2)}</p>
             </div>
         )
-    
-    
+    }   
 }
