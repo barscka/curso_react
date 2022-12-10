@@ -5,91 +5,16 @@ import Nota from './Nota';
 import Resultado from './Resultado';
 import Classe from './Classe';
 import Carro from './Carro';
+import TabelaIMC from './TabelaIMC';
+import Peso from './Peso';
+import Altura from './Altura';
+import CalcularIMC from './CalcularIMC';
+import ResultadoIMC from './ResultadoIMC';
 
 
 
 export default function Corpo() {
-   // let altura=175
-   // let peso=80
-   // var imc =0
-   // const calculoImc = (peso / ((altura * altura) / 10000)).toFixed(2)
-
     
-
-    const tabelaIMC=()=>{
-        return (
-            <table border='1' style={{borderCollapse:'collapse'}}>
-            <thead>
-                    <tr>
-                        <th> Classificacao</th> <th> IMC</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Abaixo do Peso</td>
-                        <td>Abaixo de 18,5</td>
-                    </tr>
-                    <tr>
-                        <td>Peso Normal</td>
-                        <td>Entre 18,5 e 24,9</td>
-                    </tr>
-                    <tr>
-                        <td>Sobrepeso</td>
-                        <td>Entre 25 e 29,9</td>
-                    </tr>
-                    <tr>
-                        <td>Obesidade Grau 1</td>
-                        <td>Entre 30 e 34,9</td>
-                    </tr>
-                    <tr>
-                        <td>Obesidade Grau 2</td>
-                        <td>Entre 35 e 39,9</td>
-                    </tr>
-                    <tr>
-                        <td>Obesidade Grau 3 ou Morbida</td>
-                        <td>Acima de 40</td>
-                    </tr>
-
-                </tbody>
-
-        </table>
-        )
-    }
-
-    const fpeso=(p, sp)=>{
-        return(
-            <div>
-                <label>Peso</label>
-                <input type="text" value={p} onChange={(e)=>{sp(e.target.value)}}/>
-            </div>
-        )
-    }
-    const faltura=(a, sa)=>{
-        return(
-            <div>
-                <label>Altura</label>
-                <input type="text" value={a} onChange={(e)=>{sa(e.target.value)}}/>
-            </div>
-        )
-    }
-    const fcalcular=(p,a, sr)=>{
-        
-        const calc=()=>{
-            sr(p/(a*a))
-        }
-        return(
-            <div>
-                <button onClick={calc}>Calcular</button>
-            </div>
-        )
-    }
-    const fresultado=(r)=>{
-        return(
-            <div>
-                <p> Resultado: {r.toFixed(2)}</p>
-            </div>
-        )
-    }
     const [peso, setPeso]=useState(0)
     const [altura, setAltura]=useState(0)
     const [resultado,setResultado]=useState(0)
@@ -259,11 +184,12 @@ const apagar=(chave)=>{
                                
                 />
             <h2>Calculo IMC</h2>
-            {fpeso(peso,setPeso)}
-            {faltura(altura,setAltura)}
-            {fcalcular(peso,altura,setResultado)}
-            {fresultado(resultado)}
-            {tabelaIMC()}
+            <Peso p={peso} sp={setPeso}/>
+            <Altura a={altura} sa={setAltura}/>
+            <CalcularIMC p={peso} a={altura} sr={setResultado} />
+            <ResultadoIMC r={resultado}/>
+            
+            <TabelaIMC/>
             <button onClick={()=>armazenar('ls_nome',form.nome)}>Gravar Nome</button>
             <button onClick={()=>consultar('ls_nome')}>Ver Nome</button>
             <button onClick={()=>apagar('ls_nome')}>Remover Nome</button>
